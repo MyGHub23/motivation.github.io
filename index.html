@@ -275,7 +275,7 @@
         div.onclick = () => {
           document.getElementById('note').textContent = el.note;
           document.getElementById('description').textContent = el.desc;
-          speakText(el.note + ',' + el.desc);
+          speakText(el.note + ". " +  el.desc);
           //speakText(el.desc);
         };
         container.appendChild(div);
