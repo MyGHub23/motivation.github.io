@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Motivation by Elements</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e0f7fa;
+      padding: 10px;
+      margin: 0;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background-color: #ffffff;
+      border: 2px solid red;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      width: 90%;
+      max-width: 350px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      background-color: rgb(192, 233, 192);
+    }
+
+    .header-section {
+      background-color: lightblue;
+      padding: 2px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #helpBtn,
+    #EnableBtn {
+      position: absolute;
+      top: 5px;
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: yellow;
+      background-color: blue;
+      font-size: 12px;
+    }
+
+    #helpBtn {
+      left: 10px;
+    }
+
+    #EnableBtn {
+      right: 10px;
+    }
+
+    #alphabetText {
+      background-color: yellow;
+      color: blue;
+      padding: 2px 5px;
+      font-weight: bold;
+      border-radius: 5px;
+      font-size: 14px;
+      display: inline-block;
+    }
+
+    #helpText {
+      display: none;
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: white;
+      border: 2px solid #007bff;
+      border-radius: 10px;
+      padding: 10px;
+      width: 90%;
+      max-width: 300px;
+      z-index: 1000;
+      font-size: 14px;
+    }
+
+    select {
+      padding: 4px;
+      font-size: 14px;
+      margin-left: 5px;
+      color: blue;
+      font-weight: bold;
+    }
+
+    .element-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 0 auto;
+    }
+
+    .element {
+      background-color: #06cb2d;
+      color: blue;
+      border-radius: 10px;
+      padding: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .element:hover {
+      background-color: yellow;
+      transform: scale(1.05);
+    }
+
+    #note {
+      margin: 10px auto 0 auto;
+      background-color: yellow;
+      padding: 2px 5px;
+      font-size: 15px;
+      font-weight: bold;
+      border: 2px solid #26a69a;
+      border-radius: 10px;
+      color: blue;
+      display: inline-block;
+      max-width: 90%;
+      word-wrap: break-word;
+      text-align: center;
+    }
+
+    #description {
+      margin: 5px auto 0 auto;
+      font-size: 14px;
+      color: yellow;
+      background-color: blue;
+      border: 2px solid red;
+      border-radius: 10px;
+      font-weight: bold;
+      padding: 2px 5px;
+      display: inline-block;
+      max-width: 90%;
+      word-wrap: break-word;
+      text-align: center;
+    }
+
+    footer {
+      margin-top: 10px;
+      font-size: 12px;
+    }
+
+    footer span {
+      background-color: rgb(247, 247, 187);
+      padding: 2px 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header-section">
+      <button id="helpBtn">Help</button>
+      <div>
+        <label id="alphabetText">
+          Choose:
+          <select id="elementSelect" onchange="renderElements()">
+            <option value="animal">Animal</option>
+            <option value="bird">Bird</option>
+            <option value="flower">Flower</option>
+          </select>
+        </label>
+      </div>
+      <button id="EnableBtn">Audio</button>
+      <div id="helpText">
+        <p style="margin: 4px 0;color: blue; text-align: center;">
+          Select an element type from the dropdown.
+        </p>
+        <p style="text-align: justify; margin: 4px 0; color: rgb(183, 17, 233)">
+          Click on any item to see a motivational note and hear its message. You can enable or disable audio using the
+          Audio button.
+        </p>
+      </div>
+    </div>
+
+    <div id="elementContainer" class="element-grid"></div>
+    <div id="note"></div>
+    <div id="description"></div>
+
+    <footer>
+      <span>
+        Created by <a href="mailto:mydreamcarebd@gmail.com"
+          style="color: orange; text-decoration: underline;"><strong>Abu Momen</strong></a> | © 2025 All Rights Reserved
+      </span>
+    </footer>
+  </div>
+
+  <script>
+    const data = {
+      animal: [
+        { icon: "🐘", name: "Elephant", note: "Strength & Loyalty", desc: "Stand tall with strength. Be loyal to those who walk with you." },
+        { icon: "🦁", name: "Lion", note: "Courage & Leadership", desc: "Face life with fearless courage. Lead with heart, not just power." },
+        { icon: "🦓", name: "Zebra", note: "Uniqueness & Self-Worth", desc: "Your stripes are your strength. Own your difference with pride." },
+        { icon: "🦊", name: "Fox", note: "Cleverness & Adaptability", desc: "Think smart, move wisely. There's always a way forward." },
+        { icon: "🐎", name: "Horse", note: "Freedom & Drive", desc: "Run towards your dreams with passion. Freedom fuels your journey." },
+        { icon: "🐅", name: "Tiger", note: "Focus & Determination", desc: "Eyes on the goal, heart in the fight. Never back down." },
+        { icon: "🐆", name: "Leopard", note: "Quiet Strength", desc: "You don’t need to roar. Let your quiet strength speak for you." },
+        { icon: "🐆", name: "Cheetah", note: "Speed & Accuracy", desc: "Act swiftly, but with purpose. Precision makes the difference." },
+        { icon: "🦌", name: "Deer", note: "Grace & Awareness", desc: "Move gently, but never lose sight. Grace can be powerful." },
+        { icon: "🐪", name: "Camel", note: "Endurance & Patience", desc: "Carry on through the toughest days. Your strength lies in patience." },
+        { icon: "🐇", name: "Rabbit", note: "Energy & Balance", desc: "Leap forward with energy, but pause to rest. Balance fuels success." },
+        { icon: "🐻", name: "Bear", note: "Courage & Healing", desc: "Be fierce when needed. Rest when you must. Both are brave." }
+      ],
+      bird: [
+        { icon: "🦅", name: "Eagle", note: "Focus & Vision", desc: "Aim high, stay sharp, and keep your eyes on the goal." },
+        { icon: "🕊️", name: "Dove", note: "Peace & Harmony", desc: "Stay calm, spread kindness, and bring peace wherever you go." },
+        { icon: "🦜", name: "Parrot", note: "Learning & Communication", desc: "Be open to learning, and express your truth with clarity." },
+        { icon: "🐦", name: "Sparrow", note: "Hard Work & Simplicity", desc: "Stay humble, work steadily. Greatness often grows in silence." },
+        { icon: "🦢", name: "Swan", note: "Grace & Inner Beauty", desc: "True beauty flows from within—let your grace shine through." },
+        { icon: "🐧", name: "Penguin", note: "Teamwork & Resilience", desc: "Stick together and stay strong in tough times." },
+        { icon: "🦆", name: "Duck", note: "Adaptability & Positivity", desc: "Stay calm on the surface, and keep moving underneath." },
+        { icon: "🐦‍", name: "Crow", note: "Intelligence & Strategy", desc: "Think smart, act wisely. Strategy leads to success." },
+        { icon: "🦜", name: "Cockatoo", note: "Curiosity & Playfulness", desc: "Stay curious, and enjoy the joy of discovery." },
+        { icon: "🦜", name: "Macaw", note: "Boldness & Vibrancy", desc: "Show your true colors boldly and confidently." },
+        { icon: "", name: "Woodpecker", note: "Persistence & Focus", desc: "Keep tapping at your goals—small efforts bring big results." },
+        //  { icon: "🐦", name: "Woodpecker", note: "Persistence & Focus", desc: "Keep tapping at your goals—small efforts bring big results." },
+        { icon: "🦚", name: "Peacock", note: "Self-Expression & Pride", desc: "Shine without fear. Be proud of your true self." }
+      ],
+      flower: [
+        { icon: "🌻", name: "Sunflower", note: "Positivity & Growth", desc: "Always turn toward the light and stay positive." },
+        { icon: "🌹", name: "Rose", note: "Strength & Beauty", desc: "Embrace beauty, even when it comes with thorns." },
+        { icon: "🌷", name: "Tulip", note: "Renewal & Hope", desc: "With each new season, life offers another chance to bloom." },
+        { icon: "🌸", name: "Cherry", note: "Living in the Moment", desc: "Life is short; cherish every moment." },
+      //  { icon: "🌸", name: "Cherry Blossom", note: "Living in the Moment", desc: "Life is short; cherish every moment." },
+        { icon: "🌼", name: "Daisy", note: "Innocence & Joy", desc: "Stay lighthearted. Share your smile with the world." },
+        { icon: "🥀", name: "Lotus", note: "Rising Through Challenges", desc: "Grow strong even in difficult situations." },
+        { icon: "💐", name: "Orchid", note: "Elegance & Perseverance", desc: "True beauty comes from patience and effort." },
+        { icon: "🌹", name: "Camellia", note: "Devotion & Admiration", desc: "Show love deeply. Let others feel seen and valued." },
+        { icon: "🌺", name: "Azalea", note: "Self-Care & Balance", desc: "Take care of yourself — growth starts from within." },
+        { icon: "🌵", name: "Cactus", note: "Resilience & Survival", desc: "Bloom where others can’t. Your strength is unique." },
+        { icon: "🌻", name: "Marigold", note: "Positivity & Determination", desc: "Burn brightly, even in adversity. Your light is a beacon for others." },
+        { icon: "🌿", name: "Jasmine", note: "Simplicity & Purity", desc: "True beauty is found in simplicity." }
+      ],
+    };
+
+    let isSpeechEnabled = false;
+    document.getElementById('EnableBtn').addEventListener('click', () => {
+      isSpeechEnabled = !isSpeechEnabled;
+      document.getElementById('EnableBtn').textContent = isSpeechEnabled ? "AudioN" : "AudioY";
+    });
+
+    document.getElementById('helpBtn').addEventListener('click', function () {
+      const helpText = document.getElementById('helpText');
+      helpText.style.display = helpText.style.display === 'block' ? 'none' : 'block';
+    });
+
+    function speakText(text) {
+      if (!isSpeechEnabled) return;
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function renderElements() {
+      const type = document.getElementById('elementSelect').value;
+      const container = document.getElementById('elementContainer');
+      container.innerHTML = '';
+      data[type].forEach(el => {
+        const div = document.createElement('div');
+        div.className = 'element';
+        div.textContent = `${el.icon} ${el.name}`;
+        div.onclick = () => {
+          document.getElementById('note').textContent = el.note;
+          document.getElementById('description').textContent = el.desc;
+          speakText(el.note + ',' + el.desc);
+          //speakText(el.desc);
+        };
+        container.appendChild(div);
+      });
+    }
+
+    renderElements();
+  </script>
+</body>
+
+</html>
