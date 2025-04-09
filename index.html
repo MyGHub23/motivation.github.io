@@ -171,6 +171,8 @@
             <option value="animal">Animal</option>
             <option value="bird">Bird</option>
             <option value="flower">Flower</option>
+            <option value="vegetable">Vegetable</option>
+            
           </select>
         </label>
       </div>
@@ -234,7 +236,7 @@
         { icon: "🌹", name: "Rose", note: "Strength & Beauty", desc: "Embrace beauty, even when it comes with thorns." },
         { icon: "🌷", name: "Tulip", note: "Renewal & Hope", desc: "With each new season, life offers another chance to bloom." },
         { icon: "🌸", name: "Cherry", note: "Living in the Moment", desc: "Life is short; cherish every moment." },
-      //  { icon: "🌸", name: "Cherry Blossom", note: "Living in the Moment", desc: "Life is short; cherish every moment." },
+        //  { icon: "🌸", name: "Cherry Blossom", note: "Living in the Moment", desc: "Life is short; cherish every moment." },
         { icon: "🌼", name: "Daisy", note: "Innocence & Joy", desc: "Stay lighthearted. Share your smile with the world." },
         { icon: "🥀", name: "Lotus", note: "Rising Through Challenges", desc: "Grow strong even in difficult situations." },
         { icon: "💐", name: "Orchid", note: "Elegance & Perseverance", desc: "True beauty comes from patience and effort." },
@@ -244,6 +246,20 @@
         { icon: "🌻", name: "Marigold", note: "Positivity & Determination", desc: "Burn brightly, even in adversity. Your light is a beacon for others." },
         { icon: "🌿", name: "Jasmine", note: "Simplicity & Purity", desc: "True beauty is found in simplicity." }
       ],
+      vegetable: [
+        { icon: "🥕", name: "Carrot", note: "Growth & Vision", desc: "Stay grounded and true vision comes from steady growth." },
+        { icon: "🥔", name: "Potato", note: "Humility & Versatility", desc: "True strength lies in simplicity and adaptability." },
+        { icon: "🍆", name: "Eggplant", note: "Resilience & Strength", desc: "Shine with calm confidence, even under pressure." },
+        { icon: "🌽", name: "Corn", note: "Abundance & Community", desc: "Grow tall, but grow together. Success is sweeter when shared." },
+        { icon: "🍅", name: "Tomato", note: "Balance & Adaptability", desc: "Soft yet strong-adapt, balance, and keep growing." },
+        { icon: "🥒", name: "Cucumber", note: "Coolness & Freshness", desc: "Stay cool. A calm mind brings clarity and renewal." },
+        { icon: "🧅", name: "Onion", note: "Layers of Strength", desc: "Every layer peeled makes you wiser and tougher." },
+        { icon: "🥦", name: "Broccoli", note: "Wellness & Power", desc: "Nurture your body and mind. Health is your hidden superpower." },
+        { icon: "🌶️", name: "Chili", note: "Boldness & Passion", desc: "Add your spice to the world. Be bold, be brave." },
+        { icon: "🍄", name: "Mushroom", note: "Adaptation & Endurance", desc: "Even in darkness, you can rise. Adapt and thrive." },
+        { icon: "🥜", name: "Peanut", note: "Persistence & Value", desc: "Hard shells protect golden effort. Keep going—you’re worth it." },
+        { icon: "🧄", name: "Garlic", note: "Protection & Strength", desc: "Stand strong and protect your space with quiet courage." }
+      ]
     };
 
     let isSpeechEnabled = false;
@@ -275,7 +291,7 @@
         div.onclick = () => {
           document.getElementById('note').textContent = el.note;
           document.getElementById('description').textContent = el.desc;
-          speakText(el.note + ". " +  el.desc);
+          speakText(el.note + ". " + el.desc);
           //speakText(el.desc);
         };
         container.appendChild(div);
